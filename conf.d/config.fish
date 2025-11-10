@@ -141,7 +141,7 @@ else if string match -q $distro alpine
     alias s='apk search'
 end
 
-source /home/leo/.config/fish/functions/sudo.fish
+source /home/$USER/.config/fish/functions/sudo.fish
 
 end
 
