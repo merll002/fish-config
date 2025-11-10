@@ -118,7 +118,7 @@ function rm
             return 1
     end
     echo -e $BC"Deleting files with command:$BR sudo rm $params $args"
-    read search -P $BY"Continue? [y/N]$BG "
+    read search -P $BY"Continue? [y/N]$BR "
     switch (string lower "$search")
         case y
             set continue 1

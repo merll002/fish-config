@@ -1,14 +1,4 @@
-
-# overwrite greeting
-# potentially disabling fastfetch
-#function fish_greeting
-#    # smth smth
-#end
-
-
 if status is-interactive
-
-
 
 if test (which pacman 2>/dev/null)
     set distro "arch"
@@ -31,13 +21,13 @@ end
 ## Prevent completion for my alias
 complete -e rm
 
-
 set BR (set_color --bold red)
 set BG (set_color --bold green)
 set B (set_color blue)
 set BB (set_color --bold blue)
 set BY (set_color --bold yellow)
 set RESET (set_color normal)
+
 
 ## Wacom Stuff
 
@@ -57,7 +47,7 @@ alias spotify-update="flatpak mask --remove com.spotify.Client && flatpak update
 
 ## File and Directory Management
 alias mkdir='mkdir -p'
-# alias rm='echo Use trash-put instead or use sudo.'
+
 alias cat='bat'
 alias ks='eza --icons=always --classify'
 alias sl='eza --icons=always --classify'
@@ -94,6 +84,7 @@ alias fixkvm='sudo rmmod kvm_amd && sudo rmmod kvm'
 alias getclass="/usr/lib/qt6/bin/qdbus org.kde.KWin /KWin org.kde.KWin.queryWindowInfo | grep -E 'resourceName|resourceClass'"
 alias unlock='faillock --user leo --reset'
 alias penv="if test -d .venv; else; uv venv ; end && source .venv/bin/activate.fish"
+alias refreshdrive="yes '' | sudo rclone config reconnect GoogleDriveILike: && yes '' | sudo rclone config reconnect GoogleDriveSnale: && yes '' | sudo rclone config reconnect GoogleDriveAppleID:"
 
 ## Environment Variables
 set -gx EDITOR /usr/bin/micro
@@ -105,7 +96,6 @@ zoxide init fish --cmd cd | source
 
 fzf --fish | source
 
-
 ## Alternatives!
 alias unzip="alternatives ouch unzip"
 alias tar="alternatives ouch tar"
@@ -114,7 +104,7 @@ alias getpath='echo -e $BG"Use$BY rlk$BG instead."'
 
 ## Package Management
 
-if string match $distro arch
+if string match -q $distro arch
     alias i='paru -S --needed'
     alias u='flatpak update && paru -Syu'
     alias um='paru -Sy'
@@ -124,7 +114,7 @@ if string match $distro arch
     alias pacman='paru'
     alias ratemirrors='rate-mirrors --disable-comments-in-file --protocol=https arch --max-delay 5200 | sudo tee /etc/pacman.d/mirrorlist && um'
 
-else if string match $distro debian
+else if string match -q $distro debian
     alias i='sudo apt install'
     alias r='sudo apt purge --autoremove'
     alias u='sudo apt update && sudo apt upgrade && flatpak update'
@@ -135,7 +125,7 @@ else if string match $distro debian
     alias bat='batcat'
     alias fd='fdfind'
 
-else if string match $distro fedora
+else if string match -q $distro fedora
     alias i='sudo dnf install'
     alias r='sudo dnf remove'
     alias u='sudo dnf upgrade --refresh'
@@ -143,7 +133,7 @@ else if string match $distro fedora
     alias s='dnf search'
     alias ss='dnf list --installed | grep'
 
-else if string match $distro alpine
+else if string match -q $distro alpine
     alias i='sudo apk add'
     alias r='sudo apk del'
     alias u='sudo apk upgrade'
@@ -153,10 +143,8 @@ end
 
 source /home/leo/.config/fish/functions/sudo.fish
 
-
 end
 
 # Added by LM Studio CLI (lms)
 set -gx PATH $PATH /home/leo/.lmstudio/bin
 # End of LM Studio CLI section
-
