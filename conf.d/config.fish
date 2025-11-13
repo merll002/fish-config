@@ -21,6 +21,9 @@ end
 ## Prevent completion for my alias
 complete -e rm
 
+## Remove git lag
+complete -e git
+
 set BR (set_color --bold red)
 set BG (set_color --bold green)
 set B (set_color blue)
@@ -89,8 +92,6 @@ alias refreshdrive="yes '' | sudo rclone config reconnect GoogleDriveILike: && y
 ## Environment Variables
 set -gx EDITOR /usr/bin/micro
 set -gx PATH $PATH:
-
-starship init fish | source
 
 zoxide init fish --cmd cd | source
 
