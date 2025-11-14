@@ -6,6 +6,13 @@ function rm
     set BC (set_color --bold cyan)
     set RESET (set_color normal)
 
+    if test (which fd >/dev/null 2>&1)
+        set fd (which fd)
+    else
+        set fd /bin/fdfind
+
+    end 
+    
     for f in $argv
         if not string match -qr "^-\S*" -- "$f"
             set args $args $f
@@ -49,7 +56,7 @@ function rm
     
     echo -e "$RESET"
     set count 0
-    /bin/fd -t f -0 . $args | while read -l -z file
+    $fd -t f -0 . $args | while read -l -z file
         set count (math $count + 1)
         printf "\r$extra Number of files: %d" $count
         if test $count -eq 5000
