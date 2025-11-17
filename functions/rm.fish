@@ -6,7 +6,7 @@ function rm
     set BC (set_color --bold cyan)
     set RESET (set_color normal)
 
-    if test (which fd >/dev/null 2>&1)
+    if test (which fd) >/dev/null 2>&1
         set fd (which fd)
     else
         set fd /bin/fdfind
