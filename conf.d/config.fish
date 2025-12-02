@@ -22,7 +22,7 @@ end
 complete -e rm
 
 ## Remove git lag
-complete -e git
+# complete -e git
 
 set BR (set_color --bold red)
 set BG (set_color --bold green)
