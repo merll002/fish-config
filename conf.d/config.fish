@@ -64,7 +64,7 @@ alias of='xdg-open (kitten choose-files  --mode=file)'
 
 ## Command Substitutions
 alias nano='micro'
-alias rlk='readlink -f'
+alias rlk='/bin/readlink -f'
 alias pip='uv pip'
 alias pip3='uv pip'
 
@@ -107,7 +107,7 @@ alias getpath='echo -e $BG"Use$BY rlk$BG instead."'
 
 if string match -q $distro arch
     alias i='paru -S --needed'
-    alias u='flatpak update && paru -Syu'
+    alias u='ratemirrors && flatpak update && paru -Syu && paru -S --rebuild kwin-effects-forceblur'
     alias um='paru -Sy'
     alias upgradethenshutdown="sudo su -c 'flatpak update -y && paru -Syu --noconfirm && shutdown now'"
     alias r='paru -Rncs'

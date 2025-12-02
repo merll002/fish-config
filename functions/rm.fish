@@ -56,7 +56,7 @@ function rm
     
     echo -e "$RESET"
     set count 0
-    $fd -t f -0 . $args | while read -l -z file
+    $fd -H -t f -0 . $args | while read -l -z file
         set count (math $count + 1)
         printf "\r$extra Number of files: %d" $count
         if test $count -eq 5000
