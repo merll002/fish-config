@@ -21,8 +21,7 @@ end
 ## Prevent completion for my alias
 complete -e rm
 
-## Remove git lag
-# complete -e git
+bind ctrl-l 'clear;fish_prompt'
 
 set BR (set_color --bold red)
 set BG (set_color --bold green)
