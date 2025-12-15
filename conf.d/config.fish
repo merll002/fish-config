@@ -107,7 +107,8 @@ alias getpath='echo -e $BG"Use$BY rlk$BG instead."'
 
 if string match -q $distro arch
     alias i='paru -S --needed'
-    alias u='ratemirrors && flatpak update && paru -Syu && paru -S --rebuild kwin-effects-forceblur'
+    alias u='ratemirrors && flatpak update -y && paru -Syu && paru -S --rebuild --noconfirm kwin-effects-forceblur'
+    alias unoconfirm="ratemirrors && flatpak update -y && paru -Syu --noconfirm --overwrite='*' && paru -S --rebuild --noconfirm kwin-effects-forceblur"
     alias um='paru -Sy'
     alias upgradethenshutdown="sudo su -c 'flatpak update -y && paru -Syu --noconfirm && shutdown now'"
     alias r='paru -Rncs'
