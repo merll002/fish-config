@@ -35,7 +35,7 @@ function rm
     
     if test $ok -eq 1
         echo -e $BC"Deleting files with command:$BR sudo rm $params $args"
-        sudo /bin/rm $params $args
+        sudo /bin/rm $params $args --one-file-system
         return 0
     end
 
@@ -132,6 +132,6 @@ function rm
         case '*'
             return 1
     end
-    sudo /bin/rm $params $args
+    sudo /bin/rm $params $args --one-file-system
     return 0
 end
