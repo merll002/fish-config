@@ -1,5 +1,8 @@
 if status is-interactive
 
+# Fix backwards prompt
+set -g fish_key_bindings fish_hybrid_key_bindings
+
 if test (which pacman 2>/dev/null)
     set distro "arch"
 
@@ -30,9 +33,9 @@ set BB (set_color --bold blue)
 set BY (set_color --bold yellow)
 set RESET (set_color normal)
 
+alias fixzlib='i zlib lib32-zlib'
 
 ## Wacom Stuff
-
 alias wacom='xsetwacom --set "Wacom Bamboo 2FG 4x5 Pen stylus" Button 2 pan && xsetwacom --set "Wacom Bamboo 2FG 4x5 Pen stylus"  "PanScrollThreshold" 200'
 alias enablewacom='systemctl --user stop opentabletdriver.service && sudo modprobe -i wacom && sleep 1 && xsetwacom --set "Wacom Bamboo 2FG 4x5 Pen stylus" Button 2 pan && xsetwacom --set "Wacom Bamboo 2FG 4x5 Pen stylus"  "PanScrollThreshold" 200'
 alias disablewacom='sudo modprobe -r wacom && systemctl --user start opentabletdriver.service'
@@ -106,14 +109,15 @@ alias getpath='echo -e $BG"Use$BY rlk$BG instead."'
 
 if string match -q $distro arch
     alias i='paru -S --needed'
-    alias u='ratemirrors && flatpak update -y && paru -Syu && paru -S --rebuild --noconfirm kwin-effects-forceblur'
+    alias u='ratemirrors && flatpak update -y && paru -Syu --batchinstall --cleanafter && paru -S --rebuild --noconfirm kwin-effects-glass-git'
     alias unoconfirm="ratemirrors && flatpak update -y && paru -Syu --noconfirm --overwrite='*' && paru -S --rebuild --noconfirm kwin-effects-forceblur"
     alias um='paru -Sy'
     alias upgradethenshutdown="sudo su -c 'flatpak update -y && paru -Syu --noconfirm && shutdown now'"
     alias r='paru -Rncs'
     alias ss='pacman -Q | grep'
     alias pacman='paru'
-    alias ratemirrors='rate-mirrors --disable-comments-in-file --protocol=https arch --max-delay 5200 | sudo tee /etc/pacman.d/mirrorlist && um'
+    alias ratemirrors='sudo cachyos-rate-mirrors'
+    alias ratemirrorsbad='rate-mirrors --entry-country=UK --max-jumps=1 --country-neighbors-per-country=1 --country-test-mirrors-per-country=6 --disable-comments-in-file --protocol=https arch --max-delay 5200 | sudo tee /etc/pacman.d/mirrorlist && um'
 
 else if string match -q $distro debian
     alias i='sudo apt install'

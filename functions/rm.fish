@@ -6,24 +6,61 @@ function rm
     set BC (set_color --bold cyan)
     set RESET (set_color normal)
 
+    if test (whoami) = root
+        set command 'sudo /bin/rm'
+    else
+        set command '/bin/rm'
+    end
+    
     if test (which fd) >/dev/null 2>&1
         set fd (which fd)
     else
         set fd /bin/fdfind
-
     end 
-    
+
+    argparse -u -- $argv
+
     for f in $argv
-        if not string match -qr "^-\S*" -- "$f"
-            set args $args $f
-        else if string match -qr "^-\S*" -- "$f"
-            set params $params $f
-        else
-            echo "Weird arguments given. Please invoke rm by path (/bin/rm)"
+        set args "$args" \""$f"\"
+    end
+    
+    if not test -z $bad_files
+        read search -P $BY"You dont have permission to delete these files: $bad_files. Use sudo? [y/N]$BG "
+        switch (string lower "$search")
+            case y
+                set command 'sudo /bin/rm'
+            case '*'
+                return 1
         end
     end
+
+    function delete
+        set BY (set_color --bold yellow)
+        set BR (set_color --bold red)
+        set BC (set_color --bold cyan)
+        echo -e $BC"Deleting files with command:$BR $argv"
+        read search -P $BY"Continue? [y/N]$BR "
+        switch (string lower "$search")
+            case y
+                set continue 1
+            case '*'
+                return 1
+        end
+        eval $argv --one-file-system
+        return 0
+    end
+    
+    # for f in $argv
+    #     if not string match -qr "^-\S*" -- "$f"
+    #         set args $args "$f"
+    #     else if string match -qr "^-\S*" -- "$f"
+    #         set params $params "$f"
+    #     else
+    #         echo "Weird arguments given. Please invoke rm by path (/bin/rm)"
+    #     end
+    # end
     set ok 1
-    for f in $args
+    for f in $argv
         if not test -f "$f"
             set ok 0
         end
@@ -31,15 +68,21 @@ function rm
             echo "$BC$f$BY does$BR not$BY exist"
             return 1
         end
-    end
-    
-    if test $ok -eq 1
-        echo -e $BC"Deleting files with command:$BR sudo rm $params $args"
-        sudo /bin/rm $params $args --one-file-system
-        return 0
+        if not test -w "$f"
+            set bad_files $bad_files "$f"
+        end 
     end
 
+    if test $ok -eq 1
+        delete $command $argv_opts $args
+    end
     
+    # if test $ok -eq 1
+    #     echo -e $BC"Deleting files with command:$BR $command $params $args"
+    #     eval $command $argv_opts $argv --one-file-system
+    #     return 0
+    # end
+
 
     for f in $args
         # Check if the argument is a mount point using findmnt
@@ -56,7 +99,7 @@ function rm
     
     echo -e "$RESET"
     set count 0
-    $fd -H -t f -0 . $args | while read -l -z file
+    eval $fd -H -t f -0 . "$args" | while read -l -z file
         set count (math $count + 1)
         printf "\r$extra Number of files: %d" $count
         if test $count -eq 5000
@@ -117,21 +160,6 @@ function rm
         end
     end
     echo 
-    read search -P $BY"Are you sure you want to delete $count files? [y/N]$BG "
-    switch (string lower "$search")
-        case y
-            set continue 1
-        case '*'
-            return 1
-    end
-    echo -e $BC"Deleting files with command:$BR sudo rm $params $args"
-    read search -P $BY"Continue? [y/N]$BR "
-    switch (string lower "$search")
-        case y
-            set continue 1
-        case '*'
-            return 1
-    end
-    sudo /bin/rm $params $args --one-file-system
-    return 0
+    echo -e $BY"$count file(s)!"
+    delete $command $argv_opts $args
 end

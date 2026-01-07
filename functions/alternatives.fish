@@ -1,4 +1,8 @@
 function alternatives
+    if test $stubborn
+        command $argv[2..-1]
+        return 0
+    end
     set BR (set_color --bold red)
     set BG (set_color --bold green)
     set B (set_color blue)
@@ -12,6 +16,7 @@ function alternatives
             commandline --replace "$argv[1]"
         case n
             command $argv[2..-1]
+            set -g stubborn very     
         case '*'
             return 1
     end
