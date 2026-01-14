@@ -19,6 +19,22 @@ else if test (which emerge 2>/dev/null)
     set distro "gentoo"
 end
 
+
+function upgrade
+    ratemirrors
+    flatpak update -y
+    if /bin/pacman -Qu | grep plasma
+        set rebuild true
+    end
+    paru -Syu --batchinstall --cleanafter
+    if set -q $rebuild
+        paru -S --rebuild --noconfirm kwin-effects-glass-git
+    end
+end
+
+
+
+
 # Organised Fish Shell Aliases
 
 ## Prevent completion for my alias
@@ -111,7 +127,7 @@ alias getpath='echo -e $BG"Use$BY rlk$BG instead."'
 
 if string match -q $distro arch
     alias i='paru -S --needed'
-    alias u='ratemirrors && flatpak update -y && paru -Syu --batchinstall --cleanafter && paru -S --rebuild --noconfirm kwin-effects-glass-git'
+    alias u='upgrade'
     alias unoconfirm="ratemirrors && flatpak update -y && paru -Syu --noconfirm --overwrite='*' && paru -S --rebuild --noconfirm kwin-effects-forceblur"
     alias um='paru -Sy'
     alias upgradethenshutdown="sudo su -c 'flatpak update -y && paru -Syu --noconfirm && shutdown now'"
