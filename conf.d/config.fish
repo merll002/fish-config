@@ -42,13 +42,6 @@ complete -e rm
 
 bind ctrl-l 'clear;fish_prompt'
 
-set BR (set_color --bold red)
-set BG (set_color --bold green)
-set B (set_color blue)
-set BB (set_color --bold blue)
-set BY (set_color --bold yellow)
-set RESET (set_color normal)
-
 alias fixzlib='i zlib lib32-zlib'
 
 ## Wacom Stuff

@@ -35,18 +35,12 @@ function rm
     end
 
     function delete
-        set BY (set_color --bold yellow)
-        set BR (set_color --bold red)
         set BC (set_color --bold cyan)
+        set BR (set_color --bold red)
         echo -e $BC"Deleting files with command:$BR $argv"
-        read search -P $BY"Continue? [y/N]$BR "
-        switch (string lower "$search")
-            case y
-                set continue 1
-            case '*'
-                return 1
+        if ask "Continue?"
+            eval $argv --one-file-system
         end
-        eval $argv --one-file-system
         return 0
     end
 
@@ -66,11 +60,16 @@ function rm
 
     if test $ok -eq 1
         delete $command $argv_opts $args
+        return 0
     end
 
     for f in $args
         # Check if the argument is a mount point using findmnt
-        set mounts (cut -d' ' -f2 /proc/mounts | grep $f)
+        if test -z $f # If array element is empty
+            continue
+        end
+        
+        set mounts (cut -d' ' -f2 /proc/mounts | grep (string replace '"' '' "$f" -a))
             if test $status -eq 0
                 echo -e $BR"WARNING: Folder contains the following mounts:$BY"
                 findmnt / | head -1
@@ -85,7 +84,7 @@ function rm
     set count 0
     eval $fd -H -t f -0 . "$args" | while read -l -z file
         set count (math $count + 1)
-        printf "\r$extra Number of files: %d" $count
+        printf "\rNumber of files: %d {$extra}" $count
         if test $count -eq 5000
             printf '\e[38;2;0;255;0m'
             set extra 😁
