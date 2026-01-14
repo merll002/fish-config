@@ -43,16 +43,7 @@ function rm
         end
         return 0
     end
-    
-    # for f in $argv
-    #     if not string match -qr "^-\S*" -- "$f"
-    #         set args $args "$f"
-    #     else if string match -qr "^-\S*" -- "$f"
-    #         set params $params "$f"
-    #     else
-    #         echo "Weird arguments given. Please invoke rm by path (/bin/rm)"
-    #     end
-    # end
+
     set ok 1
     for f in $argv
         if not test -f "$f"
@@ -71,13 +62,6 @@ function rm
         delete $command $argv_opts $args
         return 0
     end
-    
-    # if test $ok -eq 1
-    #     echo -e $BC"Deleting files with command:$BR $command $params $args"
-    #     eval $command $argv_opts $argv --one-file-system
-    #     return 0
-    # end
-
 
     for f in $args
         # Check if the argument is a mount point using findmnt
