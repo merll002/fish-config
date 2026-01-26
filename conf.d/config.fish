@@ -155,6 +155,14 @@ else if string match -q $distro alpine
     alias u='sudo apk upgrade'
     alias upgradethenshutdown="sudo su -c 'flatpak update -y && apk upgrade && shutdown now'"
     alias s='apk search'
+
+else if string match -q $distro gentoo
+    alias i='sudo emerge -av'
+    alias ib='sudo emerge -avg --binpkg-respect-use=y'
+    alias ibq='sudo emerge -avgq --binpkg-respect-use=y'
+    alias iq='sudo emerge -avq'
+    alias r='sudo emerge -cav'
+    alias u='sudo emaint --auto sync && emerge --ask --verbose --update --deep --changed-use @world'
 end
 
 source /home/$USER/.config/fish/functions/sudo.fish
