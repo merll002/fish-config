@@ -1,5 +1,5 @@
 function ask
-    source ~/.config/fish/colours.fish
+    source /home/leo/.config/fish/colours.fish
     read search -P $BG"$argv$BY [y/N]$BB ➜$BR "
     switch (string lower "$search")
         case y
