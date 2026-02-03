@@ -1,5 +1,5 @@
 function rm
-    source /home/leo/.config/fish/functions/ask.fish
+    source /home/$USER/.config/fish/functions/ask.fish
     set BR (set_color --bold red)
     set BY (set_color --bold yellow)
     set BG (set_color --bold green)
