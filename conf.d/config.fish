@@ -81,6 +81,8 @@ alias pip3='uv pip'
 alias less='less -R'
 alias grc='grc --colour=on'
 alias blkid='grc blkid'
+alias rg='rga-fzf'
+alias dua='cull'
 
 ## System Utilities
 alias dmount='udisksctl mount -b'
@@ -116,9 +118,8 @@ fzf --fish | source
 ## Alternatives!
 alias unzip="alternatives ouch unzip"
 alias tar="alternatives ouch tar"
+alias du="alternatives cull du"
 alias readlink='alternatives rlk readlink'
-alias getpath='echo -e $BG"Use$BY rlk$BG instead."'
-
 ## Package Management
 
 if string match -q $distro arch
