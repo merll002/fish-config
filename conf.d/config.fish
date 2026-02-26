@@ -83,6 +83,7 @@ alias grc='grc --colour=on'
 alias blkid='grc blkid'
 alias rg='rga-fzf'
 alias dua='cull'
+alias lsblk='lsblk -o NAME,SIZE,LABEL,MOUNTPOINTS'
 
 ## System Utilities
 alias dmount='udisksctl mount -b'
