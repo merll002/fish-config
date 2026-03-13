@@ -81,12 +81,21 @@ alias pip3='uv pip'
 alias less='less -R'
 alias grc='grc --colour=on'
 alias blkid='grc blkid'
+alias somo='snitch'
+
+## GitHub Substitutions
+alias g=git
+alias gpl='git pull'
+alias gps='git push'
+alias gs='git status'
+alias gd='git diff'
+alias gc='git clone -j$(nproc) --depth 1'
+
 
 ## System Utilities
 alias dmount='udisksctl mount -b'
 alias dumount='udisksctl unmount -b'
 alias restartghostty='killall ghostty'
-alias gc='git clone -j$(nproc) --depth 1'
 alias nameof='ps -o comm= -p'
 alias fixpass='faillock --user leo --reset'
 alias gpupowersave='echo low | sudo tee /sys/class/drm/card1/device/power_dpm_force_performance_level'
