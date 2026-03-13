@@ -117,21 +117,29 @@ alias pip3='uv pip'
 alias less='less -R'
 alias grc='grc --colour=on'
 alias blkid='grc blkid'
+alias somo='snitch'
 alias rg='rga-fzf'
 alias dua='cull'
 alias lsblk='lsblk -o NAME,SIZE,LABEL,MOUNTPOINTS'
+
+## GitHub Substitutions
+alias g=git
+alias gpl='git pull'
+alias gps='git push'
+alias gs='git status'
+alias gd='git diff'
+alias gc='git clone -j$(nproc) --depth 1'
 
 ## System Utilities
 alias dmount='udisksctl mount -b'
 alias dumount='udisksctl unmount -b'
 alias restartghostty='killall ghostty'
-alias gc='git clone -j$(nproc) --depth 1'
 alias nameof='ps -o comm= -p'
 alias fixpass='faillock --user leo --reset'
 alias gpupowersave='echo low | sudo tee /sys/class/drm/card1/device/power_dpm_force_performance_level'
 alias gpupower='echo auto | sudo tee /sys/class/drm/card1/device/power_dpm_force_performance_level'
 if test $TERM = xterm-kitty;
-    alias ssh='kitten ssh'
+    alias ssh='kitten ssh -C'
 end
 alias df='dysk -c+uuid'
 
@@ -141,7 +149,7 @@ alias sctl='/usr/bin/systemctl'
 alias fixkvm='sudo rmmod kvm_amd && sudo rmmod kvm'
 alias getclass="/usr/lib/qt6/bin/qdbus org.kde.KWin /KWin org.kde.KWin.queryWindowInfo | grep -E 'resourceName|resourceClass'"
 alias unlock='faillock --user leo --reset'
-alias penv="if test -d .venv; else; uv venv ; end && source .venv/bin/activate.fish"
+alias penv="if test -d .venv; else; uv venv -p 3.14 ; end && source .venv/bin/activate.fish"
 alias refreshdrive="yes '' | sudo rclone config reconnect GoogleDriveILike: && yes '' | sudo rclone config reconnect GoogleDriveSnale: && yes '' | sudo rclone config reconnect GoogleDriveAppleID:"
 
 ## Environment Variables
@@ -200,8 +208,12 @@ else if string match -q $distro gentoo
     alias ib='sudo emerge -avg --binpkg-respect-use=y'
     alias ibq='sudo emerge -avgq --binpkg-respect-use=y'
     alias iq='sudo emerge -avq'
-    alias r='sudo emerge -cav'
-    alias u='sudo emaint --auto sync && emerge --ask --verbose --update --deep --changed-use @world'
+    alias r='echo "Use rd to deselect them, then rr to depclean."'
+    alias rd='sudo emerge --deselect'
+    alias rr='sudo emerge -cav'
+    alias s='emerge --search'
+    alias u='sudo emerge --ask --verbose --update --deep --changed-use --with-bdeps=y @world && sudo emerge -av --depclean'
+    alias um='sudo emaint --auto --quiet sync'
 end
 
 source /home/$USER/.config/fish/functions/sudo.fish
