@@ -23,11 +23,11 @@ end
 function upgrade
     ratemirrors
     flatpak update -y
-    if /bin/pacman -Qu | grep plasma
+    if /bin/pacman -Qu | grep -q plasma
         set rebuild true
     end
     paru -Syu --batchinstall --cleanafter
-    if set -q $rebuild
+    if set -q rebuild
         paru -S --rebuild --noconfirm kwin-effects-glass-git
     end
 end
@@ -69,15 +69,21 @@ alias ls='eza --icons=always --classify'
 alias la='eza --icons=always --classify -lA'
 alias tree='eza --icons=always --classify -T'
 alias fd='echo Use$BY fdf$RESET for finding files and$BY fdd$RESET for finding folders.'
-alias fdf='fzf -e --walker=file --query'
+alias of='fzf -e --walker=file --query'
 alias fdd='fzf -e --walker=dir --query'
-alias of='xdg-open (kitten choose-files  --mode=file)'
+alias fdf='kitten choose-files  --mode=file'
 
 ## Command Substitutions
 alias nano='micro'
 alias rlk='/bin/readlink -f'
 alias pip='uv pip'
 alias pip3='uv pip'
+alias less='less -R'
+alias grc='grc --colour=on'
+alias blkid='grc blkid'
+alias rg='rga-fzf'
+alias dua='cull'
+alias lsblk='lsblk -o NAME,SIZE,LABEL,MOUNTPOINTS'
 
 ## System Utilities
 alias dmount='udisksctl mount -b'
@@ -113,13 +119,12 @@ fzf --fish | source
 ## Alternatives!
 alias unzip="alternatives ouch unzip"
 alias tar="alternatives ouch tar"
+alias du="alternatives cull du"
 alias readlink='alternatives rlk readlink'
-alias getpath='echo -e $BG"Use$BY rlk$BG instead."'
-
 ## Package Management
 
 if string match -q $distro arch
-    alias i='paru -S --needed'
+    alias i='paru -Sy --needed'
     alias u='upgrade'
     alias unoconfirm="ratemirrors && flatpak update -y && paru -Syu --noconfirm --overwrite='*' && paru -S --rebuild --noconfirm kwin-effects-forceblur"
     alias um='paru -Sy'

@@ -1,5 +1,5 @@
 function rm
-
+    source /home/$USER/.config/fish/functions/ask.fish
     set BR (set_color --bold red)
     set BY (set_color --bold yellow)
     set BG (set_color --bold green)
@@ -24,15 +24,6 @@ function rm
         set args "$args" \""$f"\"
     end
     
-    if not test -z $bad_files
-        read search -P $BY"You dont have permission to delete these files: $bad_files. Use sudo? [y/N]$BG "
-        switch (string lower "$search")
-            case y
-                set command 'sudo /bin/rm'
-            case '*'
-                return 1
-        end
-    end
 
     function delete
         set BC (set_color --bold cyan)
@@ -53,9 +44,18 @@ function rm
             echo "$BC$f$BY does$BR not$BY exist"
             return 1
         end
-        if not test -w "$f"
+        if not test -w (dirname "$f"); and not test -d "$f"
             set bad_files $bad_files "$f"
         end 
+    end
+    if not test -z $bad_files
+        read search -P $BY"You dont have permission to delete these files: $bad_files. Use sudo? [y/N]$BG "
+        switch (string lower "$search")
+            case y
+                set command 'sudo /bin/rm'
+            case '*'
+                return 1
+        end
     end
 
     if test $ok -eq 1
@@ -84,7 +84,7 @@ function rm
     set count 0
     eval $fd -H -t f -0 . "$args" | while read -l -z file
         set count (math $count + 1)
-        printf "\rNumber of files: %d {$extra}" $count
+        printf "\rNumber of files: %d %s" $count $extra
         if test $count -eq 5000
             printf '\e[38;2;0;255;0m'
             set extra 😁
