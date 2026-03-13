@@ -21,7 +21,10 @@ end
 
 
 function upgrade
-    ratemirrors
+    if ! test -e /tmp/mirrorsdone
+        ratemirrors
+        touch /tmp/mirrorsdone
+    end
     flatpak update -y
     if /bin/pacman -Qu | grep -q plasma
         set rebuild true
@@ -32,13 +35,46 @@ function upgrade
     end
 end
 
+function upgradethenreboot
+    if ! test -e /tmp/mirrorsdone
+        ratemirrors
+        touch /tmp/mirrorsdone
+    end
+    flatpak update -y
+    if /bin/pacman -Qu | grep -q plasma
+        set rebuild true
+    end
+    paru -Syu --batchinstall --cleanafter --noconfirm
+    if set -q rebuild
+        paru -S --rebuild --noconfirm kwin-effects-glass-git
+    end
+    sudo systemctl reboot
+end
 
-
+function upgradethenshutdown
+    if ! test -e /tmp/mirrorsdone
+        ratemirrors
+        touch /tmp/mirrorsdone
+    end
+    flatpak update -y
+    if /bin/pacman -Qu | grep -q plasma
+        set rebuild true
+    end
+    paru -Syu --batchinstall --cleanafter --noconfirm
+    if set -q rebuild
+        paru -S --rebuild --noconfirm kwin-effects-glass-git
+    end
+    sudo systemctl poweroff
+end
 
 # Organised Fish Shell Aliases
 
-## Prevent completion for my alias
+## Prevent completion for my aliases and alternatives
 complete -e rm
+complete -e tar
+complete -e unzip
+complete -e du
+complete -e cat
 
 bind ctrl-l 'clear;fish_prompt'
 
@@ -120,15 +156,13 @@ fzf --fish | source
 alias unzip="alternatives ouch unzip"
 alias tar="alternatives ouch tar"
 alias du="alternatives cull du"
-alias readlink='alternatives rlk readlink'
+alias cat='alternatives mcat bat'
 ## Package Management
 
 if string match -q $distro arch
     alias i='paru -Sy --needed'
     alias u='upgrade'
-    alias unoconfirm="ratemirrors && flatpak update -y && paru -Syu --noconfirm --overwrite='*' && paru -S --rebuild --noconfirm kwin-effects-forceblur"
     alias um='paru -Sy'
-    alias upgradethenshutdown="sudo su -c 'flatpak update -y && paru -Syu --noconfirm && shutdown now'"
     alias r='paru -Rncs'
     alias ss='pacman -Q | grep'
     alias pacman='paru'
