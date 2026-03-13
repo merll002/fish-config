@@ -103,7 +103,7 @@ alias fixpass='faillock --user leo --reset'
 alias gpupowersave='echo low | sudo tee /sys/class/drm/card1/device/power_dpm_force_performance_level'
 alias gpupower='echo auto | sudo tee /sys/class/drm/card1/device/power_dpm_force_performance_level'
 if test $TERM = xterm-kitty;
-    alias ssh='kitten ssh'
+    alias ssh='kitten ssh -C'
 end
 alias df='dysk -c+uuid'
 
