@@ -81,8 +81,10 @@ alias pip3='uv pip'
 alias less='less -R'
 alias grc='grc --colour=on'
 alias blkid='grc blkid'
-<<<<<<< HEAD
 alias somo='snitch'
+alias rg='rga-fzf'
+alias dua='cull'
+alias lsblk='lsblk -o NAME,SIZE,LABEL,MOUNTPOINTS'
 
 ## GitHub Substitutions
 alias g=git
@@ -91,12 +93,6 @@ alias gps='git push'
 alias gs='git status'
 alias gd='git diff'
 alias gc='git clone -j$(nproc) --depth 1'
-
-=======
-alias rg='rga-fzf'
-alias dua='cull'
-alias lsblk='lsblk -o NAME,SIZE,LABEL,MOUNTPOINTS'
->>>>>>> 076d6dd6664876865ac2d2982cb9cc385985ebf2
 
 ## System Utilities
 alias dmount='udisksctl mount -b'
