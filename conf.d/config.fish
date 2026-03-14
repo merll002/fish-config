@@ -22,25 +22,28 @@ end
 
 function upgrade
     if ! test -e /tmp/mirrorsdone
-        ratemirrors
-        touch /tmp/mirrorsdone
+        ratemirrors && touch /tmp/mirrorsdone &
     end
-    flatpak update -y
+    flatpak update -y &
+    go-global-update &
+    cargo install-update -a &
     if /bin/pacman -Qu | grep -q plasma
         set rebuild true
     end
+    wait
     paru -Syu --batchinstall --cleanafter
     if set -q rebuild
         paru -S --rebuild --noconfirm kwin-effects-glass-git
     end
 end
 
-function upgradethenreboot
+function upgradeunattended
     if ! test -e /tmp/mirrorsdone
-        ratemirrors
-        touch /tmp/mirrorsdone
+        ratemirrors && touch /tmp/mirrorsdone &
     end
-    flatpak update -y
+    flatpak update -y &
+    go-global-update &
+    cargo install-update -a &
     if /bin/pacman -Qu | grep -q plasma
         set rebuild true
     end
@@ -48,23 +51,16 @@ function upgradethenreboot
     if set -q rebuild
         paru -S --rebuild --noconfirm kwin-effects-glass-git
     end
-    sudo systemctl reboot
 end
 
 function upgradethenshutdown
-    if ! test -e /tmp/mirrorsdone
-        ratemirrors
-        touch /tmp/mirrorsdone
-    end
-    flatpak update -y
-    if /bin/pacman -Qu | grep -q plasma
-        set rebuild true
-    end
-    paru -Syu --batchinstall --cleanafter --noconfirm
-    if set -q rebuild
-        paru -S --rebuild --noconfirm kwin-effects-glass-git
-    end
-    sudo systemctl poweroff
+    upgradeunattended
+    sudo systemctl shutdown
+end
+
+function upgradethenreboot
+    upgradeunattended
+    sudo systemctl reboot
 end
 
 # Organised Fish Shell Aliases
