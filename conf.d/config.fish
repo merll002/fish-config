@@ -148,6 +148,7 @@ alias getclass="/usr/lib/qt6/bin/qdbus org.kde.KWin /KWin org.kde.KWin.queryWind
 alias unlock='faillock --user leo --reset'
 alias penv="if test -d .venv; else; uv venv -p 3.14 ; end && source .venv/bin/activate.fish"
 alias refreshdrive="yes '' | sudo rclone config reconnect GoogleDriveILike: && yes '' | sudo rclone config reconnect GoogleDriveSnale: && yes '' | sudo rclone config reconnect GoogleDriveAppleID:"
+alias resource="source ~/.config/fish/conf.d/config.fish"
 
 ## Environment Variables
 set -gx EDITOR /usr/bin/micro
