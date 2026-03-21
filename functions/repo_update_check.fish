@@ -2,7 +2,9 @@ function repo_update_check
     source /home/$USER/.config/fish/colours.fish
     set repos (cat ~/.config/repos.conf)
     for repo in $repos
-        touch /tmp/last_fetch
+        if ! test -f /tmp/last_fetch
+            echo (date +%d) > /tmp/last_fetch
+        end
         if test (cat /tmp/last_fetch) != (date +%d)
             git -C "$repo" fetch &
             echo (date +%d) > /tmp/last_fetch
