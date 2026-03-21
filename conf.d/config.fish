@@ -22,11 +22,12 @@ end
 
 function upgrade
     if ! test -e /tmp/mirrorsdone
-        ratemirrors && touch /tmp/mirrorsdone &
+        ratemirrors &
+        touch /tmp/mirrorsdone
     end
-    flatpak update -y &
     go-global-update &
     cargo install-update -a &
+    flatpak update -y
     if /bin/pacman -Qu | grep -q plasma
         set rebuild true
     end
@@ -113,7 +114,7 @@ alias pip3='uv pip'
 alias less='less -R'
 alias grc='grc --colour=on'
 alias blkid='grc blkid'
-alias somo='snitch'
+alias somo='sonar'
 alias rg='rga-fzf'
 alias dua='cull'
 alias lsblk='lsblk -o NAME,SIZE,LABEL,MOUNTPOINTS'
