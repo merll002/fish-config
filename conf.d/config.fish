@@ -101,8 +101,8 @@ alias ls='eza --icons=always --classify'
 alias la='eza --icons=always --classify -lA'
 alias tree='eza --icons=always --classify -T'
 alias fd='echo Use$BY fdf$RESET for finding files and$BY fdd$RESET for finding folders.'
-alias of='fzf -e --walker=file --query'
-alias fdd='fzf -e --walker=dir --query'
+alias of='fzf -e --walker=file'
+alias fdd='fzf -e --walker=dir'
 alias fdf='kitten choose-files  --mode=file'
 
 ## Command Substitutions
