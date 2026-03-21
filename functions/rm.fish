@@ -1,10 +1,6 @@
 function rm
     source /home/$USER/.config/fish/functions/ask.fish
-    set BR (set_color --bold red)
-    set BY (set_color --bold yellow)
-    set BG (set_color --bold green)
-    set BC (set_color --bold cyan)
-    set RESET (set_color normal)
+    source /home/$USER/.config/fish/colours.fish
 
     if test (whoami) = root
         set command 'sudo /bin/rm'

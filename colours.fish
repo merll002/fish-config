@@ -1,6 +1,7 @@
+set B (set_color blue)
 set BR (set_color --bold red)
 set BG (set_color --bold green)
-set B (set_color blue)
 set BB (set_color --bold blue)
 set BY (set_color --bold yellow)
+set BC (set_color --bold cyan)
 set RESET (set_color normal)
