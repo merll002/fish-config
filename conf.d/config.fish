@@ -215,9 +215,7 @@ else if string match -q $distro gentoo
     alias u='sudo emerge --ask --verbose --update --deep --changed-use --with-bdeps=y @world && sudo emerge -av --depclean'
     alias um='sudo emaint --auto --quiet sync'
 end
-function fish_greeting
-    repo_update_check
-end
+repo_update_check
 end
 
 # Added by LM Studio CLI (lms)

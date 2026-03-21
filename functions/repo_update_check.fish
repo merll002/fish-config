@@ -22,7 +22,7 @@ function repo_update_check
             set msg "$msg$BY $ahead$RESET$BG ahead$RESET"
         end
         if test $unstaged -gt 0
-            set msg "$msg$BY $unstaged$RESET left$BC unstaged$RESET"
+            set msg "$msg$BY $unstaged$BC unstaged$RESET"
         end
         echo "$msg"
     end
