@@ -71,7 +71,6 @@ complete -e rm
 complete -e tar
 complete -e unzip
 complete -e du
-complete -e cat
 
 bind ctrl-l 'clear;fish_prompt'
 
@@ -161,7 +160,7 @@ fzf --fish | source
 alias unzip="alternatives ouch unzip"
 alias tar="alternatives ouch tar"
 alias du="alternatives cull du"
-alias cat='alternatives mcat bat'
+
 ## Package Management
 
 if string match -q $distro arch
