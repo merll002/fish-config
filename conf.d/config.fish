@@ -217,6 +217,7 @@ else if string match -q $distro gentoo
 end
 if functions -q fish_greeting
     functions --copy fish_greeting original_greeting
+    functions -e fish_greeting
     original_greeting
 end
 repo_update_check
