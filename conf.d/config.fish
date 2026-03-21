@@ -118,13 +118,14 @@ alias rg='rga-fzf'
 alias dua='cull'
 alias lsblk='lsblk -o NAME,SIZE,LABEL,MOUNTPOINTS'
 
-## GitHub Substitutions
+## git Substitutions
 alias g=git
 alias gpl='git pull'
 alias gps='git push'
 alias gs='git status'
 alias gd='git diff'
 alias gc='git clone -j$(nproc) --depth 1'
+alias gcm='git commit -am'
 
 ## System Utilities
 alias dmount='udisksctl mount -b'
