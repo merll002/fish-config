@@ -215,6 +215,10 @@ else if string match -q $distro gentoo
     alias u='sudo emerge --ask --verbose --update --deep --changed-use --with-bdeps=y @world && sudo emerge -av --depclean'
     alias um='sudo emaint --auto --quiet sync'
 end
+if functions -q fish_greeting
+    functions --copy fish_greeting original_greeting
+    original_greeting
+end
 repo_update_check
 end
 
