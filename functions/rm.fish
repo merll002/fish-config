@@ -17,7 +17,7 @@ function rm
     argparse -u -- $argv
 
     for f in $argv
-        set args "$args" \""$f"\"
+        set -a args \""$f"\"
     end
     
 
@@ -41,7 +41,7 @@ function rm
             return 1
         end
         if not test -w (dirname "$f"); and not test -d "$f"
-            set bad_files $bad_files "$f"
+            set -a bad_files "$f"
         end 
     end
     if not test -z $bad_files
