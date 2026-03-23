@@ -1,6 +1,10 @@
 function repo_update_check
     source /home/$USER/.config/fish/colours.fish
-    set repos (cat ~/.config/repos.conf)
+    if test -f ~/.config/repos.conf
+        set repos (cat ~/.config/repos.conf)
+    else
+        echo "Repo update check configuration$BR not found$RESET, add repos to$BY ~/.config/repos.conf"
+    end
     for repo in $repos
         if ! test -f /tmp/last_fetch
             echo (date +%d) > /tmp/last_fetch
