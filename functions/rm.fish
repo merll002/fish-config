@@ -1,12 +1,13 @@
 function rm
-    source /home/$USER/.config/fish/functions/ask.fish
-    source /home/$USER/.config/fish/colours.fish
-
     if test (whoami) = root
-        set command 'sudo /bin/rm'
+        echo "Sudo no worky - run as normal user or prepend with /bin/."
+        return 1
     else
         set command '/bin/rm'
     end
+    source /home/$USER/.config/fish/functions/ask.fish
+    source /home/$USER/.config/fish/colours.fish
+
     
     if test (which fd) >/dev/null 2>&1
         set fd (which fd)
@@ -30,9 +31,10 @@ function rm
         end
         return 0
     end
-
+    
     set ok 1
     for f in $argv
+        # Test if files exist
         if not test -f "$f"
             set ok 0
         end
@@ -40,7 +42,8 @@ function rm
             echo "$BC$f$BY does$BR not$BY exist"
             return 1
         end
-        if not test -w (dirname "$f"); and not test -d "$f"
+        # Test if files/directories can be deleted
+        if not test -w (dirname "$f")
             set -a bad_files "$f"
         end 
     end
