@@ -45,13 +45,8 @@ function rm
         end 
     end
     if not test -z $bad_files
-        read search -P $BY"You dont have permission to delete these files: $bad_files. Use sudo? [y/N]$BG "
-        switch (string lower "$search")
-            case y
-                set command 'sudo /bin/rm'
-            case '*'
-                return 1
-        end
+        ask "You dont have permission to delete these files: $bad_files. Use sudo?" || return 1
+        set command 'sudo /bin/rm'
     end
 
     if test $ok -eq 1
