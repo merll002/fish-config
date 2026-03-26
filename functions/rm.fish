@@ -47,7 +47,7 @@ function rm
             set -a bad_files "$f"
         end 
     end
-    if not test -z $bad_files
+    if not test -z "$bad_files"
         ask "You dont have permission to delete these files: $bad_files. Use sudo?" || return 1
         set command 'sudo /bin/rm'
     end

@@ -19,14 +19,15 @@ abbr -a -- spotify-update "flatpak mask --remove com.spotify.Client && flatpak u
 abbr -a -- mkdir 'mkdir -p'
 
 abbr -a -- cat 'bat'
-abbr -a -- ls 'eza --icons always --classify'
-abbr -a -- ks 'eza --icons always --classify'
-abbr -a -- sl 'eza --icons always --classify'
-abbr -a -- la 'eza --icons always --classify -lA'
-abbr -a -- tree 'eza --icons always --classify -T'
-abbr -a -- of 'fzf -e --walker file'
-abbr -a -- fdd 'fzf -e --walker dir'
-abbr -a -- fdf 'kitten choose-files --mode file'
+# Them expanding is annoying
+alias ls='eza --icons always --classify'
+alias ks='eza --icons always --classify'
+alias sl='eza --icons always --classify'
+alias la='eza --icons always --classify -lA'
+alias tree='eza --icons always --classify -T'
+alias of='fzf -e --walker file'
+alias fdd='fzf -e --walker dir'
+alias fdf='kitten choose-files --mode file'
 
 ## Command Substitutions
 abbr -a -- nano 'micro'
