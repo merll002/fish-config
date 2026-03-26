@@ -204,15 +204,15 @@ else if string match -q $distro alpine
     alias s='apk search'
 
 else if string match -q $distro gentoo
-    alias i='sudo emerge -av'
-    alias ib='sudo emerge -avg --binpkg-respect-use=y'
-    alias ibq='sudo emerge -avgq --binpkg-respect-use=y'
+    alias i='sudo emerge -av --keep-going=y'
+    alias ib='sudo emerge -avg --binpkg-respect-use=y --keep-going=y'
+    alias ibq='sudo emerge -avgq --binpkg-respect-use=y --keep-going=y'
     alias iq='sudo emerge -avq'
     alias r='echo "Use rd to deselect them, then rr to depclean."'
     alias rd='sudo emerge --deselect'
     alias rr='sudo emerge -cav'
     alias s='emerge --search'
-    alias u='sudo emerge --ask --verbose --update --deep --changed-use --with-bdeps=y @world && sudo emerge -av --depclean'
+    alias u='read -P "You should sync (um) first" && sudo emerge --ask --verbose --update --deep --changed-use --with-bdeps=y @world --keep-going=y && sudo emerge -av --depclean'
     alias um='sudo emaint --auto --quiet sync'
 end
 if functions -q fish_greeting
