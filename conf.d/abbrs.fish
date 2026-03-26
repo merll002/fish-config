@@ -84,6 +84,22 @@ abbr -a -- du "alternatives cull du"
 
 ## Package Management
 
+if test (which pacman 2>/dev/null)
+    set distro "arch"
+
+else if test (which apt 2>/dev/null)
+    set distro "debian"
+
+else if test (which dnf 2>/dev/null)
+    set distro "fedora"
+
+else if test (which apk 2>/dev/null)
+    set distro "alpine"
+    
+else if test (which emerge 2>/dev/null)
+    set distro "gentoo"
+end
+
 if string match -q $distro arch
     abbr -a -- i 'paru -Sy --needed'
     abbr -a -- u 'upgrade'

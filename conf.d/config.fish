@@ -3,22 +3,6 @@ if status is-interactive
 # Fix backwards prompt
 set -g fish_key_bindings fish_hybrid_key_bindings
 
-if test (which pacman 2>/dev/null)
-    set distro "arch"
-
-else if test (which apt 2>/dev/null)
-    set distro "debian"
-
-else if test (which dnf 2>/dev/null)
-    set distro "fedora"
-
-else if test (which apk 2>/dev/null)
-    set distro "alpine"
-    
-else if test (which emerge 2>/dev/null)
-    set distro "gentoo"
-end
-
 function upgrade
     if ! test -e /tmp/mirrorsdone
         ratemirrors &
