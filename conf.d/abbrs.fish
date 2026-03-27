@@ -133,15 +133,15 @@ else if string match -q $distro alpine
     abbr -a -- upgradethenshutdown "sudo su -c 'flatpak update -y && apk upgrade && shutdown now'"
     abbr -a -- s 'apk search'
 else if string match -q $distro gentoo
-    abbr -a -- i 'sudo emerge -av --keep-going y'
-    abbr -a -- ib 'sudo emerge -avg --binpkg-respect-use y --keep-going y'
-    abbr -a -- ibq 'sudo emerge -avgq --binpkg-respect-use y --keep-going y'
-    abbr -a -- iq 'sudo emerge -avq'
+    abbr -a -- i 'sudo emerge -av --keep-going=y --noreplace'
+    abbr -a -- ib 'sudo emerge -avg --binpkg-respect-use=y --keep-going=y --noreplace'
+    abbr -a -- ibq 'sudo emerge -avgq --binpkg-respect-use=y --keep-going=y --noreplace'
+    abbr -a -- iq 'sudo emerge -avq --keep-going=y --noreplace'
     abbr -a -- r 'echo "Use rd to deselect them, then rr to depclean."'
     abbr -a -- rd 'sudo emerge --deselect'
     abbr -a -- rr 'sudo emerge -cav'
     abbr -a -- s 'emerge --search'
-    abbr -a -- u 'read -P "You should sync (um) first" && sudo emerge --ask --verbose --update --deep --changed-use --with-bdeps y @world --keep-going y && sudo emerge -av --depclean'
+    abbr -a -- u 'read -P "You should sync (um) first" && sudo emerge --ask --verbose --update --deep --changed-use --with-bdeps=y @world --keep-going=y && sudo emerge -av --depclean'
     abbr -a -- um 'sudo emaint --auto --quiet sync'
 end
 end
