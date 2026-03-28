@@ -71,7 +71,7 @@ abbr -a -- df 'dysk -c+uuid'
 abbr -a -- aliases 'micro ~/.config/fish/conf.d/abbrs.fish'
 abbr -a -- sctl '/usr/bin/systemctl'
 abbr -a -- fixkvm 'sudo rmmod kvm_amd && sudo rmmod kvm'
-abbr -a -- getclass "/usr/lib/qt6/bin/qdbus org.kde.KWin /KWin org.kde.KWin.queryWindowInfo | grep -E 'resourceName|resourceClass'"
+abbr -a -- getclass "qdbus6 org.kde.KWin /KWin org.kde.KWin.queryWindowInfo | grep -E 'resourceName|resourceClass'"
 abbr -a -- unlock 'faillock --user leo --reset'
 abbr -a -- penv "if test -d .venv; else; uv venv -p 3.14 ; end && source .venv/bin/activate.fish"
 abbr -a -- resource "source ~/.config/fish/conf.d/config.fish"
