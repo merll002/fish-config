@@ -133,10 +133,10 @@ else if string match -q $distro alpine
     abbr -a -- upgradethenshutdown "sudo su -c 'flatpak update -y && apk upgrade && shutdown now'"
     abbr -a -- s 'apk search'
 else if string match -q $distro gentoo
-    abbr -a -- i 'sudo emerge -av --keep-going=y --noreplace'
-    abbr -a -- ib 'sudo emerge -avg --binpkg-respect-use=y --keep-going=y --noreplace'
-    abbr -a -- ibq 'sudo emerge -avgq --binpkg-respect-use=y --keep-going=y --noreplace'
-    abbr -a -- iq 'sudo emerge -avq --keep-going=y --noreplace'
+    abbr -a -- i 'sudo emerge -av --keep-going=y --noreplace --jobs 4 --load-average 16'
+    abbr -a -- ib 'sudo emerge -avg --binpkg-respect-use=y --keep-going=y --noreplace --jobs 4 --load-average 16'
+    abbr -a -- ibq 'sudo emerge -avgq --binpkg-respect-use=y --keep-going=y --noreplace --jobs 4 --load-average 16'
+    abbr -a -- iq 'sudo emerge -avq --keep-going=y --noreplace --jobs 4 --load-average 16'
     abbr -a -- r 'echo "Use rd to deselect them, then rr to depclean."'
     abbr -a -- rd 'sudo emerge --deselect'
     abbr -a -- rr 'sudo emerge -cav'
