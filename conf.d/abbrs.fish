@@ -142,6 +142,6 @@ else if string match -q $distro gentoo
     abbr -a -- rr 'sudo emerge -cav'
     abbr -a -- s 'emerge --search'
     abbr -a -- u 'read -P "You should sync (um) first" && sudo emerge --ask --verbose --update --deep --changed-use --with-bdeps=y @world --keep-going=y && sudo emerge -av --depclean'
-    abbr -a -- um 'sudo emaint --auto --quiet sync'
+    abbr -a -- um 'sudo emaint --auto sync'
 end
 end
