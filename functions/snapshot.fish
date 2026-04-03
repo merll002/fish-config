@@ -7,7 +7,7 @@ function snapshot
         return 0
     end
     log "Creating snapshot..."
-    try "sudo btrfs subvolume snapshot -r / /.snapshots/\"$date\"" || return 1
+    ask "Create snapshot?" && try "sudo btrfs subvolume snapshot -r / /.snapshots/\"$date\"" || return 1
     slog "Successfully created snapshot!"
     return 0
 end
