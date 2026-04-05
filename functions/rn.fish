@@ -1,5 +1,4 @@
 function rn
-    source /home/$USER/.config/fish/utils.fish
     source /home/$USER/.config/fish/colours.fish
     set newpath (dirname $argv[1])/$argv[2]
     # set newpath (string replace -rf '/[^/]+(/$|$)' '/' -- $argv[1] || echo ./)$argv[2]

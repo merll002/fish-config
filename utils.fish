@@ -12,7 +12,7 @@ function elog
     echo $BR"[ERROR] $argv"$RESET
 end
 
-function slog
+function ilog
     echo $BG"[INFO] $argv"$RESET
 end
 

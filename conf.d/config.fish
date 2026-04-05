@@ -5,7 +5,7 @@ set -g fish_key_bindings fish_hybrid_key_bindings
 
 function upgrade
     if ! test -e /tmp/mirrorsdone
-        ratemirrors &
+        sudo cachyos-rate-mirrors &
         touch /tmp/mirrorsdone
     end
     go-global-update &
@@ -17,13 +17,13 @@ function upgrade
     wait
     paru -Syu --batchinstall --cleanafter
     if set -q rebuild
-        paru -S --rebuild --noconfirm kwin-effects-glass-git
+        paru -S --rebuild --noconfirm --quiet kwin-effects-glass-git
     end
 end
 
 function upgradeunattended
     if ! test -e /tmp/mirrorsdone
-        ratemirrors && touch /tmp/mirrorsdone &
+        sudo cachyos-rate-mirrors && touch /tmp/mirrorsdone &
     end
     flatpak update -y &
     go-global-update &
@@ -33,7 +33,7 @@ function upgradeunattended
     end
     paru -Syu --batchinstall --cleanafter --noconfirm
     if set -q rebuild
-        paru -S --rebuild --noconfirm kwin-effects-glass-git
+        paru -S --rebuild --noconfirm --quiet kwin-effects-glass-git
     end
 end
 
