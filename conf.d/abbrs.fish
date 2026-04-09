@@ -140,7 +140,7 @@ else if string match -q $distro gentoo
     abbr -a -- r 'echo "Use rd to deselect them, then rr to depclean."'
     abbr -a -- rd 'sudo emerge --deselect'
     abbr -a -- rr 'sudo emerge -cav'
-    abbr -a -- s 'emerge --search'
+    abbr -a -- s 'eix'
     abbr -a -- u 'read -P "You should sync (um) first" && sudo emerge --ask --verbose --update --deep --changed-use --with-bdeps=y @world --keep-going=y && sudo emerge -av --depclean'
     abbr -a -- um 'sudo emaint --auto sync'
 end
