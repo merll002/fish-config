@@ -64,7 +64,7 @@ abbr -a -- nameof 'ps -o comm -p'
 abbr -a -- fixpass 'faillock --user leo --reset'
 abbr -a -- gpupowersave 'echo low | sudo tee /sys/class/drm/card1/device/power_dpm_force_performance_level'
 abbr -a -- gpupower 'echo auto | sudo tee /sys/class/drm/card1/device/power_dpm_force_performance_level'
-test $TERM = xterm-kitty && abbr -a -- ssh 'TERM=xterm-256color kitten ssh -C'
+test $TERM = xterm-kitty && alias ssh='TERM=xterm-256color kitten ssh -C'
 abbr -a -- df 'dysk -c+uuid'
 
 ## Miscellaneous
@@ -117,7 +117,7 @@ else if string match -q $distro debian
     abbr -a -- upgradethenshutdown "sudo su -c 'apt update && apt upgrade -y && shutdown now'"
     abbr -a -- s 'apt search'
     abbr -a -- ss 'apt list --installed | grep'
-    abbr -a -- bat 'batcat'
+    abbr -a -- cat 'batcat'
     abbr -a -- fd 'fdfind'
 else if string match -q $distro fedora
     abbr -a -- i 'sudo dnf install'
