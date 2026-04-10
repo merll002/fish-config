@@ -25,8 +25,8 @@ alias ks='eza --icons always --classify'
 alias sl='eza --icons always --classify'
 alias la='eza --icons always --classify -lA'
 alias tree='eza --icons always --classify -T'
-alias of='fzf -e --walker file'
-alias fdd='fzf -e --walker dir'
+alias of='fd -H . "/" --type directory | fzf'
+alias fdd='fd -H . "/" --type file | fzf'
 alias fdf='kitten choose-files --mode file'
 
 ## Command Substitutions
@@ -87,7 +87,7 @@ abbr -a -- du "alternatives cull du"
 if test (which pacman 2>/dev/null)
     set distro "arch"
 
-else if test (which apt 2>/dev/null)
+else if test (which apt-get 2>/dev/null)
     set distro "debian"
 
 else if test (which dnf 2>/dev/null)
@@ -113,7 +113,7 @@ else if string match -q $distro debian
     abbr -a -- i 'sudo apt install'
     abbr -a -- r 'sudo apt purge --autoremove'
     abbr -a -- u 'sudo apt update && sudo apt upgrade && flatpak update'
-    abbr -a -- um'sudo apt update'
+    abbr -a -- um 'sudo apt update'
     abbr -a -- upgradethenshutdown "sudo su -c 'apt update && apt upgrade -y && shutdown now'"
     abbr -a -- s 'apt search'
     abbr -a -- ss 'apt list --installed | grep'
