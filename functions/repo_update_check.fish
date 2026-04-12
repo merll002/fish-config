@@ -13,7 +13,7 @@ function repo_update_check
             git -C "$repo" fetch &
             echo (date +%d) > /tmp/last_fetch
         end
-        set branch (git -C "$repo" branch | tr -d '* ')
+        set branch (git -C "$repo" symbolic-ref --quiet --short HEAD)
         set behind (git -C "$repo" rev-list --count HEAD..origin/"$branch")
         set ahead (git -C "$repo" rev-list --count origin/"$branch"..HEAD)
         set unstaged (git -C "$repo" status --porcelain | wc -l)

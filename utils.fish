@@ -12,8 +12,8 @@ function elog
     echo $BR"[ERROR] $argv"$RESET
 end
 
-function ilog
-    echo $BG"[INFO] $argv"$RESET
+function slog
+    echo "[INFO]$BG $argv"$RESET
 end
 
 function try
