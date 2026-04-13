@@ -1,4 +1,5 @@
 function rm
+    trap 'echo functions -e delete' EXIT
     if test (whoami) = root
         echo "Sudo no worky with this function - run as normal user or prepend with /bin/"
         return 1
@@ -15,7 +16,7 @@ function rm
 
     argparse -u -- $argv
 
-    if test -z $argv
+    if test -z "$argv"
         elog "You moron. You supplied no args. Literally what was the point?"
         return 1
     end
@@ -28,11 +29,10 @@ function rm
         return $status
     end
 
-    set ok 1
     for f in $argv
-        # Test if files exist
+        # Test if its not a file
         if not test -f "$f"
-            set ok 0
+            set folder true
         end
         if not test -e "$f"
             elog "$f doesn't exist"
@@ -48,9 +48,9 @@ function rm
         set command 'sudo /bin/rm'
     end
 
-    if test $ok -eq 1
+    if ! set -q $folder
         delete $command "$argv_opts" "$argv"
-        return 0
+        return $status
     end
 
     for f in $argv
@@ -70,5 +70,5 @@ function rm
     set count (fd -H . $argv | wc -l)
     echo
     wlog "About to delete $count file(s)!"
-    delete $command "$argv_opts" "$argv"
+    delete "$command" "$argv_opts" "$argv"
 end
