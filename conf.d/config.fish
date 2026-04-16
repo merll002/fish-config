@@ -62,7 +62,8 @@ if functions -q fish_greeting
 end
 repo_update_check
 end
-
+source /home/$USER/.config/fish/colours.fish
+source /home/$USER/.config/fish/utils.fish
 set -gx EDITOR /usr/bin/micro
 zoxide init fish --cmd cd | source
 fzf --fish | source

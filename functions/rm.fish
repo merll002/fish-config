@@ -7,7 +7,6 @@ function rm
     end
     
     source /home/$USER/.config/fish/utils.fish
-
     if test (which fd) >/dev/null 2>&1
         set fd (which fd)
     else
