@@ -1,11 +1,11 @@
 function rm
-    trap 'echo functions -e delete' EXIT
     if test (whoami) = root
         echo "Sudo no worky with this function - run as normal user or prepend with /bin/"
         return 1
     else
         set command /bin/rm
     end
+    
     source /home/$USER/.config/fish/utils.fish
 
     if test (which fd) >/dev/null 2>&1
@@ -22,10 +22,7 @@ function rm
     end
 
     function delete
-        log "Deleting files with command:$BR $argv"
-        if ask "Continue?"
-            try $argv --one-file-system
-        end
+        asktry $argv --one-file-system
         return $status
     end
 

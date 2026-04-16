@@ -25,8 +25,8 @@ alias ks='eza --icons always --classify'
 alias sl='eza --icons always --classify'
 alias la='eza --icons always --classify -lA'
 alias tree='eza --icons always --classify -T'
-alias of='fd -H . "/" --type directory | fzf'
-alias fdd='fd -H . "/" --type file | fzf'
+alias of='fd -H . . --type directory | fzf'
+alias fdd='fd -H . . --type file | fzf'
 alias fdf='kitten choose-files --mode file'
 
 ## Command Substitutions
@@ -133,8 +133,8 @@ else if string match -q $distro alpine
     abbr -a -- upgradethenshutdown "sudo su -c 'flatpak update -y && apk upgrade && shutdown now'"
     abbr -a -- s 'apk search'
 else if string match -q $distro gentoo
-    abbr -a -- i 'sudo emerge -av --noreplace'
-    abbr -a -- ib 'sudo emerge -avg --binpkg-respect-use=y --noreplace'
+    abbr -a -- i 'sudo emerge -a --noreplace'
+    abbr -a -- ib 'sudo emerge -ag --binpkg-respect-use=y --noreplace'
     abbr -a -- r 'echo "Use rd to deselect them, then rr to depclean."'
     abbr -a -- rd 'sudo emerge --deselect'
     abbr -a -- rr 'sudo emerge -ca'
