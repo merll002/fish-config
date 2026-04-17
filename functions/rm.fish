@@ -44,7 +44,7 @@ function rm
         set command 'sudo /bin/rm'
     end
 
-    if ! set -q $folder
+    if ! set -q folder
         delete $command "$argv_opts" "$argv"
         return $status
     end
