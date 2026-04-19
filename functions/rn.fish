@@ -1,9 +1,7 @@
 function rn
-    source /home/$USER/.config/fish/utils.fish
-    test -n "$argv[2]" || { elog 'Missing argument'; return 1 }
-
-    set newpath (dirname $argv[1])/$argv[2]
-    if ask "Rename $argv[1] to $newpath?"
-        mv -v $argv[1] $newpath
-    end
+    test -n "$argv[2]" || { elog 'Missing argument'; return 1; }
+    set oldpath (realpath -esq "$argv[1]") || { elog "$argv[1] doesn't exist."; return 1; }
+    set newpath (dirname "$oldpath")/"$argv[2]"
+    test -w (dirname "$argv[1]") || { log 'No write permission. Using sudo...'; set sudo sudo; }
+    asktry $sudo mv -v "$oldpath" "$newpath"
 end
