@@ -25,8 +25,8 @@ alias ks='eza --icons always --classify'
 alias sl='eza --icons always --classify'
 alias la='eza --icons always --classify -lA'
 alias tree='eza --icons always --classify -T'
-alias of='fd -H . . --type directory --walker-skip /windows | fzf'
-alias fdd='fd -H . . --type file --walker-skip /windows | fzf'
+alias of='fd -H . . --type directory | fzf'
+alias fdd='fd -H . . --type file | fzf'
 alias fdf='kitten choose-files --mode file'
 
 ## Command Substitutions
