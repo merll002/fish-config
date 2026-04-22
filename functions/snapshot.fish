@@ -23,7 +23,7 @@ function snapshot
             end
         end
         if ask "You have more than two snapshots. Delete the oldest one?"
-            asktry "sudo btrfs subvolume delete $oldest_name"
+            asktry "sudo btrfs subvolume delete /.snapshots/$oldest_name"
         end
     end
     return 0
