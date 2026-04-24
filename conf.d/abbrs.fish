@@ -66,6 +66,14 @@ abbr -a -- gpupowersave 'echo low | sudo tee /sys/class/drm/card1/device/power_d
 abbr -a -- gpupower 'echo auto | sudo tee /sys/class/drm/card1/device/power_dpm_force_performance_level'
 test $TERM = xterm-kitty && alias ssh='TERM=xterm-256color kitten ssh -C'
 abbr -a -- df 'dysk -c+uuid'
+alias klogout="qdbus6 org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptLogout"
+alias klogout-force="qdbus6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logout"
+alias kshutdown="qdbus6 org.kde.LogoutPrompt /LogoutPrompt promptShutDown"
+alias kshutdown-force="qdbus6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logoutAndShutdown"
+alias kreboot="qdbus6 org.kde.LogoutPrompt /LogoutPrompt promptReboot"
+alias kreboot-force="qdbus6 org.kde.Shutdown /Shutdown  org.kde.Shutdown.logoutAndReboot"
+alias klock="qdbus6 org.kde.screensaver /ScreenSaver Lock"
+alias khibernate="qdbus6 org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Hibernate"
 
 ## Miscellaneous
 abbr -a -- aliases 'micro ~/.config/fish/conf.d/abbrs.fish'
