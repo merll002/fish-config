@@ -140,6 +140,6 @@ else if string match -q $distro gentoo
     abbr -a -- rr 'sudo emerge -ca'
     abbr -a -- s 'eix'
     abbr -a -- u 'read -P "You should sync (um) first" && sudo emerge --ask --verbose --update --deep --changed-use --with-bdeps=y @world && sudo emerge -ca'
-    abbr -a -- um 'sudo emerge --sync --quiet'
+    abbr -a -- um 'sudo EMERGE_DEFAULT_OPTS="" emerge --sync --quiet'
 end
 end
