@@ -63,7 +63,7 @@ function rm
             end
         end
     end
-    set count (fd -H . $argv | wc -l)
+    set count ($fd -H . $argv | wc -l)
     echo
     wlog "About to delete $count file(s)!"
     delete "$command" "$argv_opts" "$argv"
