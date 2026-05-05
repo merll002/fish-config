@@ -94,7 +94,9 @@ abbr -a -- du "alternatives cull du"
 
 if test (which pacman 2>/dev/null)
     set distro "arch"
-
+    function fish_command_not_found
+        asktry pkgfile "$argv[1]" || asktry findinpackage "$argv[1]"
+    end
 else if test (which apt-get 2>/dev/null)
     set distro "debian"
 
@@ -106,6 +108,9 @@ else if test (which apk 2>/dev/null)
     
 else if test (which emerge 2>/dev/null)
     set distro "gentoo"
+    function fish_command_not_found
+        asktry e-file "$argv[1]" || asktry eix "$argv[1]" || asktry equery b "$argv[1]"
+    end
 end
 
 if string match -q $distro arch
