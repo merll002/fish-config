@@ -85,7 +85,10 @@ abbr -a -- getclass "qdbus6 org.kde.KWin /KWin org.kde.KWin.queryWindowInfo | gr
 abbr -a -- unlock 'faillock --user leo --reset'
 abbr -a -- penv "if test -d .venv; else; uv venv -p 3.14 ; end && source .venv/bin/activate.fish"
 abbr -a -- resource "source ~/.config/fish/conf.d/config.fish"
-
+function run
+    chmod +x $argv[1]
+    eval $argv
+end
 
 ## Alternatives!
 abbr -a -- unzip "alternatives ouch unzip"
