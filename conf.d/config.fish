@@ -53,8 +53,6 @@ complete -e tar
 complete -e unzip
 complete -e du
 
-bind ctrl-l 'clear;fish_prompt'
-
 if functions -q fish_greeting
     functions --copy fish_greeting original_greeting
     set -U fish_greeting ""
