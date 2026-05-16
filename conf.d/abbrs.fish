@@ -130,6 +130,9 @@ if string match -q $distro arch
     abbr -a -- ratemirrorsbad 'rate-mirrors --entry-country UK --max-jumps 1 --country-neighbors-per-country 1 --country-test-mirrors-per-country 6 --disable-comments-in-file --protocol https arch --max-delay 5200 | sudo tee /etc/pacman.d/mirrorlist && um'
 else if string match -q $distro debian
     abbr -a -- i 'sudo apt install'
+    function it
+        sudo apt install "$argv" && sudo apt-mark "$argv"
+    end
     abbr -a -- r 'sudo apt purge --autoremove'
     abbr -a -- u 'sudo apt update && sudo apt upgrade && flatpak update'
     abbr -a -- um 'sudo apt update'
