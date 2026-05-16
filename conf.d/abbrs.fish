@@ -103,7 +103,9 @@ if test (which pacman 2>/dev/null)
     end
 else if test (which apt-get 2>/dev/null)
     set distro "debian"
-
+    function fish_command_not_found
+        asktry apt-file find "$argv[1]"
+    end
 else if test (which dnf 2>/dev/null)
     set distro "fedora"
 
