@@ -20,6 +20,7 @@ abbr -a -- mkdir 'mkdir -p'
 
 abbr -a -- cat 'bat'
 # Them expanding is annoying
+
 alias ls='eza --icons always --classify'
 alias ks='eza --icons always --classify'
 alias sl='eza --icons always --classify'
@@ -70,6 +71,7 @@ abbr -a -- gpupowersave 'echo low | sudo tee /sys/class/drm/card1/device/power_d
 abbr -a -- gpupower 'echo auto | sudo tee /sys/class/drm/card1/device/power_dpm_force_performance_level'
 test $TERM = xterm-kitty && alias ssh='TERM=xterm-256color kitten ssh -C'
 abbr -a -- df 'dysk -c+label,uuid'
+abbr reloadmenu 'update-desktop-database ~/.local/share/applications'
 alias klogout="qdbus6 org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptLogout"
 alias klogout-force="qdbus6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logout"
 alias kshutdown="qdbus6 org.kde.LogoutPrompt /LogoutPrompt promptShutDown"
@@ -78,6 +80,7 @@ alias kreboot="qdbus6 org.kde.LogoutPrompt /LogoutPrompt promptReboot"
 alias kreboot-force="qdbus6 org.kde.Shutdown /Shutdown  org.kde.Shutdown.logoutAndReboot"
 alias klock="qdbus6 org.kde.screensaver /ScreenSaver Lock"
 alias khibernate="qdbus6 org.kde.Solid.PowerManagement /org/freedesktop/PowerManagement Hibernate"
+
 
 ## Miscellaneous
 abbr -a -- aliases 'micro ~/.config/fish/conf.d/abbrs.fish'
@@ -139,7 +142,7 @@ else if string match -q $distro debian
     abbr -a -- s 'apt search'
     abbr -a -- ss 'apt list --installed | grep'
     abbr -a -- cat 'batcat'
-    abbr -a -- fd 'fdfind'
+    alias fd='fdfind'
 else if string match -q $distro fedora
     abbr -a -- i 'sudo dnf install'
     abbr -a -- r 'sudo dnf remove'
@@ -160,8 +163,9 @@ else if string match -q $distro gentoo
     abbr -a -- rd 'sudo emerge --deselect'
     abbr -a -- rr 'sudo EMERGE_DEFAULT_OPTS='' emerge -ca'
     abbr -a -- s 'eix'
-    abbr -a -- u 'read -P "You should sync (um) first" && sudo emerge --ask --verbose --update --deep --changed-use --with-bdeps=y @world && sudo emerge -ca'
-    alias uextra='kitty go-global-update & kitty cargo install-update -a & kitty flatpak update -y & kitty distrobox upgrade --all'
+    abbr -a -- u  'read -P "You should sync (um) first also dont forget to snapshot!!!" && sudo emerge --ask --verbose --update --deep --changed-use --with-bdeps=y @world && echo "Remember to depclean!"'
+    abbr -a -- ub 'read -P "You should sync (um) first also dont forget to snapshot!!!" && sudo FEATURES=\'-binpkg-request-signature\' emerge --ask --verbose --update --deep --changed-use --with-bdeps=y -k @world  && echo "Remember to depclean!"'
     abbr -a -- um 'sudo mirrorselect -s3 -b10 -D -c "United Kingdom" && sudo EMERGE_DEFAULT_OPTS="" emerge --sync --quiet'
+    alias uextra='kitty go-global-update & kitty cargo install-update -a & kitty flatpak update -y & kitty distrobox upgrade --all'
 end
 end
