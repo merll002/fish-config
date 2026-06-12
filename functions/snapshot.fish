@@ -1,5 +1,4 @@
 function snapshot
-    source /home/$USER/.config/fish/utils.fish
     set name (date +%m-%d-%Y)
     if test -d /.snapshots/"$name"
         for i in (seq 1 50)

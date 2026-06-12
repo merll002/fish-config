@@ -53,12 +53,6 @@ complete -e tar
 complete -e unzip
 complete -e du
 
-if functions -q fish_greeting
-    functions --copy fish_greeting original_greeting
-    set -U fish_greeting ""
-    original_greeting
-end
-repo_update_check
 end
 source /home/$USER/.config/fish/colours.fish
 source /home/$USER/.config/fish/utils.fish
